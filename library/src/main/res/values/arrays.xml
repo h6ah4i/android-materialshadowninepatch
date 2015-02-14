@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+       Copyright (C) 2015 Haruki Hasegawa
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+-->
+<resources>
+
+    <array name="ms9_ambient_shadow_drawables">
+        <item>@null</item>
+        <item>@drawable/ms9_ambient_shadow_z1</item>
+        <item>@drawable/ms9_ambient_shadow_z2</item>
+        <item>@drawable/ms9_ambient_shadow_z3</item>
+        <item>@drawable/ms9_ambient_shadow_z4</item>
+        <item>@drawable/ms9_ambient_shadow_z5</item>
+        <item>@drawable/ms9_ambient_shadow_z6</item>
+        <item>@drawable/ms9_ambient_shadow_z7</item>
+        <item>@drawable/ms9_ambient_shadow_z8</item>
+        <item>@drawable/ms9_ambient_shadow_z9</item>
+        <item>@drawable/ms9_ambient_shadow_z10</item>
+        <item>@drawable/ms9_ambient_shadow_z11</item>
+        <item>@drawable/ms9_ambient_shadow_z12</item>
+        <item>@drawable/ms9_ambient_shadow_z13</item>
+        <item>@drawable/ms9_ambient_shadow_z14</item>
+        <item>@drawable/ms9_ambient_shadow_z15</item>
+        <item>@drawable/ms9_ambient_shadow_z16</item>
+        <item>@drawable/ms9_ambient_shadow_z17</item>
+        <item>@drawable/ms9_ambient_shadow_z18</item>
+    </array>
+
+    <array name="ms9_spot_shadow_drawables">
+        <item>@null</item>
+        <item>@drawable/ms9_spot_shadow_z1</item>
+        <item>@drawable/ms9_spot_shadow_z2</item>
+        <item>@drawable/ms9_spot_shadow_z3</item>
+        <item>@drawable/ms9_spot_shadow_z4</item>
+        <item>@drawable/ms9_spot_shadow_z5</item>
+        <item>@drawable/ms9_spot_shadow_z6</item>
+        <item>@drawable/ms9_spot_shadow_z7</item>
+        <item>@drawable/ms9_spot_shadow_z8</item>
+        <item>@drawable/ms9_spot_shadow_z9</item>
+        <item>@drawable/ms9_spot_shadow_z10</item>
+        <item>@drawable/ms9_spot_shadow_z11</item>
+        <item>@drawable/ms9_spot_shadow_z12</item>
+        <item>@drawable/ms9_spot_shadow_z13</item>
+        <item>@drawable/ms9_spot_shadow_z14</item>
+        <item>@drawable/ms9_spot_shadow_z15</item>
+        <item>@drawable/ms9_spot_shadow_z16</item>
+        <item>@drawable/ms9_spot_shadow_z17</item>
+        <item>@drawable/ms9_spot_shadow_z18</item>
+    </array>
+
+</resources>
