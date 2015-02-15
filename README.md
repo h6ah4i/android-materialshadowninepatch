@@ -67,7 +67,7 @@ Usage
 MaterialShadowContainerView shadowView =
         (MaterialShadowContainerView) findViewById(R.id.shadow_item_container);
 
-float density = getResource().getResources().getDisplayMetrics().density;
+float density = getResources().getDisplayMetrics().density;
 
 shadowView.setShadowTranslationZ(density * 2.0f); // 2.0 dp
 shadowView.setShadowElevation(density * 4.0f); // 4.0 dp
