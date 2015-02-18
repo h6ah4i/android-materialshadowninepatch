@@ -3,6 +3,8 @@ Material Shadow 9-Patch
 
 This library provides 9-patch based drop shadow for view elements. Works on API level 9 or later.
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Material%20Shadow%209--Patch-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1562)
+
 ---
 
 <a href="./pic/gb.png?raw=true"><img src="./pic/gb.png?raw=true" alt="Example on Android 2.3" width="200" /></a>
