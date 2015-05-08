@@ -18,8 +18,10 @@
 num_drawables=18
 res_prefix=ms9_  # material shadow ninepatch
 
+CUR_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+
 # PHASE 1 : export PNG files
-./phase1_batch_inkscape_export.sh material_shadow.svg phase1 $num_drawables $res_prefix
+./phase1_batch_inkscape_export.sh $CUR_DIR/material_shadow.svg $CUR_DIR/phase1 $num_drawables $res_prefix
 
 # PHASE 2 : crop
 ./phase2_batch_crop_ninepatch_valid_area.sh phase1 phase2 $num_drawables $res_prefix
