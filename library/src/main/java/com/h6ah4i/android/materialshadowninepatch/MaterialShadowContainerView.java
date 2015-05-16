@@ -36,6 +36,7 @@ public class MaterialShadowContainerView extends FrameLayout {
 
     private static final float SPOT_SHADOW_X_TRANSLATION_AMOUNT_COEFFICIENT = 0.0002f;
     private static final float SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT = 0.002f;
+    private static final float NON_POSITION_AWARE_SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT = 0.2f;
 
     private float mDisplayDensity;
     private float mInvDisplayDensity;
@@ -45,6 +46,7 @@ public class MaterialShadowContainerView extends FrameLayout {
     private int mSpotShadowTranslationY;
     private float mShadowTranslationZ = 0;
     private float mShadowElevation = 0;
+    private boolean mAffectsDisplayedPosition = true;
 
     private boolean mForceUseCompatShadow = false;
 
@@ -83,6 +85,7 @@ public class MaterialShadowContainerView extends FrameLayout {
         final int spotShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_spotShadowDrawablesList, R.array.ms9_spot_shadow_drawables);
         final int ambientShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ambientShadowDrawablesList, R.array.ms9_ambient_shadow_drawables);
         final boolean forceUseCompatShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_forceUseCompatShadow, mForceUseCompatShadow);
+        final boolean affectsXYPosition = ta.getBoolean(R.styleable.MaterialShadowContainerView_affectsDisplayedPosition, mAffectsDisplayedPosition);
         ta.recycle();
 
         mSpotShadowResourcesIdList = getResourceIdArray(getResources(), spotShadowLevelListResId);
@@ -96,6 +99,7 @@ public class MaterialShadowContainerView extends FrameLayout {
         mShadowTranslationZ = shadowTranslationZ;
         mShadowElevation = shadowElevation;
         mForceUseCompatShadow = forceUseCompatShadow;
+        mAffectsDisplayedPosition = affectsXYPosition;
 
         updateShadowLevel(true);
     }
@@ -164,6 +168,20 @@ public class MaterialShadowContainerView extends FrameLayout {
 
     public float getShadowElevation() {
         return mShadowElevation;
+    }
+
+    public void setDisplayedPositionAffectionEnabled(boolean enabled) {
+        if (mAffectsDisplayedPosition == enabled) {
+            return;
+        }
+        mAffectsDisplayedPosition = enabled;
+        if (useCompatShadow()) {
+            updateShadowLevel(true);
+        }
+    }
+
+    public boolean isDisplayedPositionAffectionEnabled() {
+        return mAffectsDisplayedPosition;
     }
 
     public void setForceUseCompatShadow(boolean forceUseCompatShadow) {
@@ -388,14 +406,22 @@ public class MaterialShadowContainerView extends FrameLayout {
         final float tx = ViewCompat.getTranslationX(childView);
         final float ty = ViewCompat.getTranslationY(childView);
 
-        final int childWidth = childView.getWidth();
-        final int childHeight = childView.getHeight();
+        final float positionRelatedTranslationX;
+        final float positionRelatedTranslationY;
 
-        final int childCenterPosX = mTmpLocations[0] + (childWidth / 2);
-        final int childCenterPosY = mTmpLocations[1] + (childHeight / 2);
+        if (mAffectsDisplayedPosition) {
+            final int childWidth = childView.getWidth();
+            final int childHeight = childView.getHeight();
 
-        final float positionRelatedTranslationX = (float) Math.sqrt((childCenterPosX - mLightPositionX) * mInvDisplayDensity * SPOT_SHADOW_X_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
-        final float positionRelatedTranslationY =  (float) Math.sqrt((childCenterPosY - mLightPositionY) * mInvDisplayDensity * SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
+            final int childCenterPosX = mTmpLocations[0] + (childWidth / 2);
+            final int childCenterPosY = mTmpLocations[1] + (childHeight / 2);
+
+            positionRelatedTranslationX = (float) Math.sqrt((childCenterPosX - mLightPositionX) * mInvDisplayDensity * SPOT_SHADOW_X_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
+            positionRelatedTranslationY = (float) Math.sqrt((childCenterPosY - mLightPositionY) * mInvDisplayDensity * SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
+        } else {
+            positionRelatedTranslationX = 0;
+            positionRelatedTranslationY = mDisplayDensity * NON_POSITION_AWARE_SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT * zPosition;
+        }
 
         mSpotShadowTranslationX = (int) (positionRelatedTranslationX + tx + 0.5f);
         mSpotShadowTranslationY = (int) (positionRelatedTranslationY + ty + 0.5f);

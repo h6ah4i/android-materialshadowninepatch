@@ -29,7 +29,7 @@ import android.widget.SeekBar;
 
 import com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView;
 
-public class MainContentsFragment
+public class XYPositionDemoFragment
         extends Fragment
         implements View.OnClickListener,
         CheckBox.OnCheckedChangeListener,
@@ -38,56 +38,42 @@ public class MainContentsFragment
     private static final int SEEKBAR_MAX = 1000;
     private static final float MAX_ELEVATION = 9;
 
-    private static final int[] mNativeShadowItemIds = new int[]{
-            R.id.native_shadow_item_z0,
-            R.id.native_shadow_item_z1,
-            R.id.native_shadow_item_z2,
-            R.id.native_shadow_item_z3,
-            R.id.native_shadow_item_z4,
-            R.id.native_shadow_item_z5,
-            R.id.native_shadow_item_z6,
-            R.id.native_shadow_item_z7,
-            R.id.native_shadow_item_z8,
-            R.id.native_shadow_item_z9,
-    };
     private static final int[] mCompatShadowItemIds = new int[]{
-            R.id.compat_shadow_item_z0,
-            R.id.compat_shadow_item_z1,
-            R.id.compat_shadow_item_z2,
-            R.id.compat_shadow_item_z3,
-            R.id.compat_shadow_item_z4,
-            R.id.compat_shadow_item_z5,
-            R.id.compat_shadow_item_z6,
-            R.id.compat_shadow_item_z7,
-            R.id.compat_shadow_item_z8,
-            R.id.compat_shadow_item_z9,
+            R.id.compat_shadow_item_top_left,
+            R.id.compat_shadow_item_top_center,
+            R.id.compat_shadow_item_top_right,
+            R.id.compat_shadow_item_center_left,
+            R.id.compat_shadow_item_center_center,
+            R.id.compat_shadow_item_center_right,
+            R.id.compat_shadow_item_bottom_left,
+            R.id.compat_shadow_item_bottom_center,
+            R.id.compat_shadow_item_bottom_right,
     };
     private static final int[] mCompatShadowItemContainerIds = new int[]{
-            R.id.compat_shadow_item_container_z0,
-            R.id.compat_shadow_item_container_z1,
-            R.id.compat_shadow_item_container_z2,
-            R.id.compat_shadow_item_container_z3,
-            R.id.compat_shadow_item_container_z4,
-            R.id.compat_shadow_item_container_z5,
-            R.id.compat_shadow_item_container_z6,
-            R.id.compat_shadow_item_container_z7,
-            R.id.compat_shadow_item_container_z8,
-            R.id.compat_shadow_item_container_z9,
+            R.id.compat_shadow_item_container_top_left,
+            R.id.compat_shadow_item_container_top_center,
+            R.id.compat_shadow_item_container_top_right,
+            R.id.compat_shadow_item_container_center_left,
+            R.id.compat_shadow_item_container_center_center,
+            R.id.compat_shadow_item_container_center_right,
+            R.id.compat_shadow_item_container_bottom_left,
+            R.id.compat_shadow_item_container_bottom_center,
+            R.id.compat_shadow_item_container_bottom_right,
     };
 
-    private View[] mNativeShadowItems;
     private View[] mCompatShadowItems;
     private MaterialShadowContainerView[] mCompatShadowItemContainers;
     private SeekBar mSeekBarElevation;
     private CheckBox mCheckBoxForceUseCompatMode;
+    private CheckBox mCheckBoxEnableDisplayedPositionAffection;
     private float mDisplayDensity;
 
-    public MainContentsFragment() {
+    public XYPositionDemoFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_xy_position_demo, container, false);
 
         mDisplayDensity = getResources().getDisplayMetrics().density;
 
@@ -98,10 +84,8 @@ public class MainContentsFragment
         mCheckBoxForceUseCompatMode = (CheckBox) (rootView.findViewById(R.id.checkbox_force_use_compat_mode));
         mCheckBoxForceUseCompatMode.setOnCheckedChangeListener(this);
 
-        mNativeShadowItems = new View[mNativeShadowItemIds.length];
-        for (int i = 0; i < mNativeShadowItemIds.length; i++) {
-            mNativeShadowItems[i] = rootView.findViewById(mNativeShadowItemIds[i]);
-        }
+        mCheckBoxEnableDisplayedPositionAffection = (CheckBox) (rootView.findViewById(R.id.checkbox_displayed_position_affection));
+        mCheckBoxEnableDisplayedPositionAffection.setOnCheckedChangeListener(this);
 
         mCompatShadowItems = new View[mCompatShadowItemIds.length];
         for (int i = 0; i < mCompatShadowItemIds.length; i++) {
@@ -113,6 +97,16 @@ public class MainContentsFragment
             mCompatShadowItemContainers[i] = (MaterialShadowContainerView) rootView.findViewById(mCompatShadowItemContainerIds[i]);
         }
 
+        if (savedInstanceState == null) {
+            mCheckBoxForceUseCompatMode.setChecked(true);
+            mCheckBoxEnableDisplayedPositionAffection.setChecked(true);
+            mSeekBarElevation.setProgress(500);
+
+            setForceCompatMode(mCheckBoxForceUseCompatMode.isChecked());
+            setDisplayedPositionAffection(mCheckBoxEnableDisplayedPositionAffection.isChecked());
+            setItemElevation(progressToElevation(mSeekBarElevation.getProgress()));
+        }
+
         return rootView;
     }
 
@@ -121,6 +115,7 @@ public class MainContentsFragment
         super.onViewStateRestored(savedInstanceState);
 
         setForceCompatMode(mCheckBoxForceUseCompatMode.isChecked());
+        setDisplayedPositionAffection(mCheckBoxEnableDisplayedPositionAffection.isChecked());
         setItemElevation(progressToElevation(mSeekBarElevation.getProgress()));
     }
 
@@ -133,6 +128,9 @@ public class MainContentsFragment
         switch (buttonView.getId()) {
             case R.id.checkbox_force_use_compat_mode:
                 setForceCompatMode(isChecked);
+                break;
+            case R.id.checkbox_displayed_position_affection:
+                setDisplayedPositionAffection(isChecked);
                 break;
         }
     }
@@ -161,9 +159,6 @@ public class MainContentsFragment
     }
 
     public void setItemElevation(float elevation) {
-        for (View v : mNativeShadowItems) {
-            ViewCompat.setElevation(v, elevation);
-        }
         for (MaterialShadowContainerView v : mCompatShadowItemContainers) {
             v.setShadowElevation(elevation);
         }
@@ -172,6 +167,12 @@ public class MainContentsFragment
     public void setForceCompatMode(boolean forceCompatMode) {
         for (MaterialShadowContainerView v : mCompatShadowItemContainers) {
             v.setForceUseCompatShadow(forceCompatMode);
+        }
+    }
+
+    public void setDisplayedPositionAffection(boolean enabled) {
+        for (MaterialShadowContainerView v : mCompatShadowItemContainers) {
+            v.setDisplayedPositionAffectionEnabled(enabled);
         }
     }
 }

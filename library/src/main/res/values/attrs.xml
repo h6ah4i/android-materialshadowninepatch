@@ -22,5 +22,6 @@
         <attr name="spotShadowDrawablesList" format="reference" />
         <attr name="ambientShadowDrawablesList" format="reference" />
         <attr name="forceUseCompatShadow" format="boolean|reference" />
+        <attr name="affectsDisplayedPosition" format="boolean|reference" />
     </declare-styleable>
 </resources>
