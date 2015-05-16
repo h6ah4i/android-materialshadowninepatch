@@ -27,6 +27,7 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Property;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -80,12 +81,12 @@ public class MaterialShadowContainerView extends FrameLayout {
         super(context, attrs, defStyleAttr);
 
         final TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MaterialShadowContainerView, 0, 0);
-        final float shadowTranslationZ = ta.getDimension(R.styleable.MaterialShadowContainerView_shadowTranslationZ, mShadowTranslationZ);
-        final float shadowElevation = ta.getDimension(R.styleable.MaterialShadowContainerView_shadowElevation, mShadowElevation);
-        final int spotShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_spotShadowDrawablesList, R.array.ms9_spot_shadow_drawables);
-        final int ambientShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ambientShadowDrawablesList, R.array.ms9_ambient_shadow_drawables);
-        final boolean forceUseCompatShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_forceUseCompatShadow, mForceUseCompatShadow);
-        final boolean affectsXYPosition = ta.getBoolean(R.styleable.MaterialShadowContainerView_affectsDisplayedPosition, mAffectsDisplayedPosition);
+        final float shadowTranslationZ = ta.getDimension(R.styleable.MaterialShadowContainerView_ms9_shadowTranslationZ, mShadowTranslationZ);
+        final float shadowElevation = ta.getDimension(R.styleable.MaterialShadowContainerView_ms9_shadowElevation, mShadowElevation);
+        final int spotShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ms9_spotShadowDrawablesList, R.array.ms9_spot_shadow_drawables);
+        final int ambientShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ms9_ambientShadowDrawablesList, R.array.ms9_ambient_shadow_drawables);
+        final boolean forceUseCompatShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_forceUseCompatShadow, mForceUseCompatShadow);
+        final boolean affectsXYPosition = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_affectsDisplayedPosition, mAffectsDisplayedPosition);
         ta.recycle();
 
         mSpotShadowResourcesIdList = getResourceIdArray(getResources(), spotShadowLevelListResId);
@@ -574,4 +575,5 @@ public class MaterialShadowContainerView extends FrameLayout {
 
         return array;
     }
+
 }

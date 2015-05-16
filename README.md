@@ -45,8 +45,8 @@ Usage
     android:id="@+id/shadow_item_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:shadowTranslationZ="2dp"
-    app:shadowElevation="4dp">
+    app:ms9_shadowTranslationZ="2dp"
+    app:ms9_shadowElevation="4dp">
 
     <!-- NOTE 1: only 1 child can be accepted -->
     <!-- NOTE 2: margins are required to draw shadow properly -->
@@ -74,6 +74,36 @@ float density = getResources().getDisplayMetrics().density;
 shadowView.setShadowTranslationZ(density * 2.0f); // 2.0 dp
 shadowView.setShadowElevation(density * 4.0f); // 4.0 dp
 ```
+
+Advanced Usages
+---
+
+```xml
+<com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+    android:id="@+id/shadow_item_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:ms9_shadowTranslationZ="2dp"
+    app:ms9_shadowElevation="4dp"
+    app:ms9_forceUseCompatShadow="true"
+    app:ms9_affectsDisplayedPosition="true"
+    app:ms9_spotShadowDrawablesList="@array/ms9_spot_shadow_drawables"
+    app:ms9_ambientShadowDrawablesList="@array/ms9_ambient_shadow_drawables">
+
+    ...
+
+</com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+```
+
+| Property name                    | Default                               | Description                                                             |
+|----------------------------------|---------------------------------------|-------------------------------------------------------------------------|
+| `ms9_shadowTranslationZ`         | `0dp`                                 | Compatibility version of `android:translationZ`                         |
+| `ms9_shadowElevation`            | `0dp`                                 | Compatibility version of `android:elevation`                            | 
+| `ms9_forceUseCompatShadow`       | `false`                               | Enforces to use compatibility shadow on Lollipop or later               |
+| `ms9_affectsDisplayedPosition`   | `true`                                | Specify whether the shadow position is affected by the target view's position (emulates Lollipop's behavior) |
+| `ms9_spotShadowDrawablesList`    | `@array/ms9_spot_shadow_drawables`    | Specify *Spot shadow (Key shadow)* 9-patch resources                    |
+| `ms9_ambientShadowDrawablesList` | `@array/ms9_ambient_shadow_drawables` | Specify *Ambient shadow* 9-patch resources                              |
+
 
 License
 ---

@@ -17,4 +17,5 @@
     <string name="app_name">Material Shadow 9-Patch</string>
     <string name="z_position_demo">Z position demo</string>
     <string name="xy_position_demo">XY position demo</string>
+    <string name="z_position_animation_demo">Z position animation demo</string>
 </resources>

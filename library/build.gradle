@@ -27,6 +27,8 @@ ext {
 apply from: '../common/android-set-common-properties.gradle'
 
 android {
+    resourcePrefix 'ms9_'
+
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 21
