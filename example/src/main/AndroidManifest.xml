@@ -31,6 +31,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ZPositionDemoActivity"
+                  android:label="@string/z_position_demo" />
+
+        <activity android:name=".XYPositionDemoActivity"
+                  android:label="@string/xy_position_demo" />
+
+        <activity android:name=".ZPositionAnimationDemoActivity"
+                  android:label="@string/z_position_animation_demo" />
+
     </application>
 
 </manifest>

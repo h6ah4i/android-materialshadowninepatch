@@ -18,7 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarStyle="outsideOverlay"
-    tools:context=".MainActivity$PlaceholderFragment">
+    tools:context=".ZPositionDemoFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,25 +34,25 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/text_seekbar_elevation_label"
+                android:id="@+id/text_seekbar_translation_z_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="@+id/seekbar_elevation"
-                android:text="Elevation: " />
+                android:layout_centerVertical="@+id/seekbar_translation_z"
+                android:text="Translation Z: " />
 
             <SeekBar
-                android:id="@+id/seekbar_elevation"
+                android:id="@+id/seekbar_translation_z"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/text_seekbar_elevation_label" />
+                android:layout_toRightOf="@+id/text_seekbar_translation_z_label" />
 
             <CheckBox
                 android:id="@+id/checkbox_force_use_compat_mode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/seekbar_elevation"
+                android:layout_below="@+id/seekbar_translation_z"
                 android:enabled="@bool/is_lollipop_or_later"
                 android:text="Force use compat mode" />
         </RelativeLayout>

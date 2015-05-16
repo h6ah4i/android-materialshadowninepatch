@@ -16,19 +16,49 @@
 
 package com.h6ah4i.android.example.materialshadowninepatch;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new MainContentsFragment())
-                    .commit();
+
+
+        findViewById(R.id.button_z_position_demo).setOnClickListener(this);
+        findViewById(R.id.button_xy_position_demo).setOnClickListener(this);
+        findViewById(R.id.button_z_position_animation_demo).setOnClickListener(this);
+
+        /** {@link android.util.Property} is only available on API level 14 or later */
+        findViewById(R.id.button_z_position_animation_demo).setEnabled(
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_z_position_demo:
+                launchActivity(ZPositionDemoActivity.class);
+                break;
+            case R.id.button_xy_position_demo:
+                launchActivity(XYPositionDemoActivity.class);
+                break;
+            case R.id.button_z_position_animation_demo:
+                launchActivity(ZPositionAnimationDemoActivity.class);
+                break;
+            default:
+                break;
         }
+    }
+
+    private void launchActivity(Class<? extends Activity> activityClass) {
+        Intent intent = new Intent(this, activityClass);
+        startActivity(intent);
     }
 }
