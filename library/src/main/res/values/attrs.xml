@@ -17,11 +17,11 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <declare-styleable name="MaterialShadowContainerView">
-        <attr name="shadowTranslationZ" format="dimension|reference" />
-        <attr name="shadowElevation" format="dimension|reference" />
+        <attr name="shadowTranslationZ" format="dimension" />
+        <attr name="shadowElevation" format="dimension" />
         <attr name="spotShadowDrawablesList" format="reference" />
         <attr name="ambientShadowDrawablesList" format="reference" />
-        <attr name="forceUseCompatShadow" format="boolean|reference" />
-        <attr name="affectsDisplayedPosition" format="boolean|reference" />
+        <attr name="forceUseCompatShadow" format="boolean" />
+        <attr name="affectsDisplayedPosition" format="boolean" />
     </declare-styleable>
 </resources>
