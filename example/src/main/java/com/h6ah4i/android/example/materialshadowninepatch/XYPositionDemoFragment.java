@@ -110,15 +110,6 @@ public class XYPositionDemoFragment
     }
 
     @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        setForceCompatMode(mCheckBoxForceUseCompatMode.isChecked());
-        setDisplayedPositionAffection(mCheckBoxEnableDisplayedPositionAffection.isChecked());
-        setItemsTranslationZ(progressToTranslationZAmount(mSeekBarTranslationZ.getProgress()));
-    }
-
-    @Override
     public void onClick(View v) {
     }
 

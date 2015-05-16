@@ -117,14 +117,6 @@ public class ZPositionDemoFragment
     }
 
     @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        setForceCompatMode(mCheckBoxForceUseCompatMode.isChecked());
-        setItemsTranslationZ(progressToTranslationZAmount(mSeekBarElevation.getProgress()));
-    }
-
-    @Override
     public void onClick(View v) {
     }
 

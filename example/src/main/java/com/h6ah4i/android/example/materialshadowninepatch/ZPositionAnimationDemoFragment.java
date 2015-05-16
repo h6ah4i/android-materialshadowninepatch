@@ -64,13 +64,6 @@ public class ZPositionAnimationDemoFragment
     }
 
     @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        setForceCompatMode(mCheckBoxForceUseCompatMode.isChecked());
-    }
-
-    @Override
     public void onClick(View v) {
         if (v == mCompatShadowItem) {
             ObjectAnimator animator = ObjectAnimator.ofFloat(

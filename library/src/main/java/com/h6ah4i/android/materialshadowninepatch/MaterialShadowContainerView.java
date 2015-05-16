@@ -25,6 +25,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Property;
@@ -45,10 +47,10 @@ public class MaterialShadowContainerView extends FrameLayout {
     private int mLightPositionY;
     private int mSpotShadowTranslationX;
     private int mSpotShadowTranslationY;
+
     private float mShadowTranslationZ = 0;
     private float mShadowElevation = 0;
     private boolean mAffectsDisplayedPosition = true;
-
     private boolean mForceUseCompatShadow = false;
 
     private int[] mSpotShadowResourcesIdList;
@@ -101,6 +103,38 @@ public class MaterialShadowContainerView extends FrameLayout {
         mShadowElevation = shadowElevation;
         mForceUseCompatShadow = forceUseCompatShadow;
         mAffectsDisplayedPosition = affectsXYPosition;
+
+        updateShadowLevel(true);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState s = new SavedState(superState);
+
+        s.shadowElevation = mShadowElevation;
+        s.shadowTranslationZ = mShadowTranslationZ;
+        s.affectsDisplayedPosition = mAffectsDisplayedPosition;
+        s.forceUseCompatShadow = mForceUseCompatShadow;
+
+        return s;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState s = (SavedState) state;
+
+        super.onRestoreInstanceState(s.getSuperState());
+
+        mShadowElevation = s.shadowElevation;
+        mShadowTranslationZ = s.shadowTranslationZ;
+        mAffectsDisplayedPosition = s.affectsDisplayedPosition;
+        mForceUseCompatShadow = s.forceUseCompatShadow;
 
         updateShadowLevel(true);
     }
@@ -576,4 +610,48 @@ public class MaterialShadowContainerView extends FrameLayout {
         return array;
     }
 
+    private static class SavedState extends BaseSavedState implements Parcelable {
+        float shadowTranslationZ;
+        float shadowElevation;
+        boolean affectsDisplayedPosition;
+        boolean forceUseCompatShadow;
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel source) {
+            super(source);
+            shadowTranslationZ = source.readFloat();
+            shadowElevation = source.readFloat();
+            affectsDisplayedPosition = source.readByte() != 0;
+            forceUseCompatShadow = source.readByte() != 0;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeFloat(shadowTranslationZ);
+            dest.writeFloat(shadowElevation);
+            dest.writeByte((byte) (affectsDisplayedPosition ? 1 : 0));
+            dest.writeByte((byte) (forceUseCompatShadow ? 1 : 0));
+        }
+
+        @SuppressWarnings("unused")
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
 }
