@@ -36,7 +36,7 @@ public class ZPositionDemoFragment
         SeekBar.OnSeekBarChangeListener {
 
     private static final int SEEKBAR_MAX = 1000;
-    private static final float MAX_ELEVATION = 9;
+    private static final float MAX_TRANSLATION_Z = 9;
 
     private static final int[] mNativeShadowItemIds = new int[]{
             R.id.native_shadow_item_z0,
@@ -91,7 +91,7 @@ public class ZPositionDemoFragment
 
         mDisplayDensity = getResources().getDisplayMetrics().density;
 
-        mSeekBarElevation = (SeekBar) rootView.findViewById(R.id.seekbar_elevation);
+        mSeekBarElevation = (SeekBar) rootView.findViewById(R.id.seekbar_translation_z);
         mSeekBarElevation.setOnSeekBarChangeListener(this);
         mSeekBarElevation.setMax(SEEKBAR_MAX);
 
@@ -121,7 +121,7 @@ public class ZPositionDemoFragment
         super.onViewStateRestored(savedInstanceState);
 
         setForceCompatMode(mCheckBoxForceUseCompatMode.isChecked());
-        setItemElevation(progressToElevation(mSeekBarElevation.getProgress()));
+        setItemsTranslationZ(progressToTranslationZAmount(mSeekBarElevation.getProgress()));
     }
 
     @Override
@@ -140,9 +140,9 @@ public class ZPositionDemoFragment
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
-            case R.id.seekbar_elevation:
+            case R.id.seekbar_translation_z:
                 if (fromUser) {
-                    setItemElevation(progressToElevation(progress));
+                    setItemsTranslationZ(progressToTranslationZAmount(progress));
                 }
                 break;
         }
@@ -156,16 +156,16 @@ public class ZPositionDemoFragment
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
-    private float progressToElevation(int progress) {
-        return MAX_ELEVATION * mDisplayDensity * progress / SEEKBAR_MAX;
+    private float progressToTranslationZAmount(int progress) {
+        return MAX_TRANSLATION_Z * mDisplayDensity * progress / SEEKBAR_MAX;
     }
 
-    public void setItemElevation(float elevation) {
+    public void setItemsTranslationZ(float amount) {
         for (View v : mNativeShadowItems) {
-            ViewCompat.setElevation(v, elevation);
+            ViewCompat.setTranslationZ(v, amount);
         }
         for (MaterialShadowContainerView v : mCompatShadowItemContainers) {
-            v.setShadowElevation(elevation);
+            v.setShadowTranslationZ(amount);
         }
     }
 
