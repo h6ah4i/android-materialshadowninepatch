@@ -1,0 +1,189 @@
+<!--
+       Copyright (C) 2015 Haruki Hasegawa
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".XYPositionDemoFragment">
+
+    <RelativeLayout
+        android:id="@+id/control_views_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_seekbar_translation_z_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="@+id/seekbar_translation_z"
+            android:text="Translation Z: " />
+
+        <SeekBar
+            android:id="@+id/seekbar_translation_z"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/text_seekbar_translation_z_label" />
+
+        <CheckBox
+            android:id="@+id/checkbox_displayed_position_affection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkbox_force_use_compat_mode"
+            android:text="Displayed position affection" />
+
+        <CheckBox
+            android:id="@+id/checkbox_force_use_compat_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekbar_translation_z"
+            android:enabled="@bool/is_lollipop_or_later"
+            android:text="Force use compat mode" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/control_views_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- TOP, LEFT -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_top_left"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_top_left"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+        <!-- TOP, CENTER -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_top_center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_top_center"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+        <!-- TOP, RIGHT -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_top_right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_top_right"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+
+        <!-- CENTER, LEFT -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_center_left"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_center_left"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+        <!-- CENTER, CENTER -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_center_center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_center_center"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+        <!-- CENTER, RIGHT -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_center_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_center_right"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+
+        <!-- BOTTOM, LEFT -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_bottom_left"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_bottom_left"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+        <!-- BOTTOM, CENTER -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_bottom_center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_bottom_center"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+        <!-- BOTTOM, RIGHT -->
+        <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+            android:id="@+id/compat_shadow_item_container_bottom_right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            style="@style/commonNinePatchShadowContainerStyle">
+
+            <TextView
+                android:id="@+id/compat_shadow_item_bottom_right"
+                style="@style/commonNinePatchShadowItemViewStyle"
+                android:text="ITEM" />
+        </com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView>
+
+    </RelativeLayout>
+</RelativeLayout>

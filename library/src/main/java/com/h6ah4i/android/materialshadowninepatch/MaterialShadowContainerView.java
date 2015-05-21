@@ -25,6 +25,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -36,6 +38,7 @@ public class MaterialShadowContainerView extends FrameLayout {
 
     private static final float SPOT_SHADOW_X_TRANSLATION_AMOUNT_COEFFICIENT = 0.0002f;
     private static final float SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT = 0.002f;
+    private static final float NON_POSITION_AWARE_SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT = 0.2f;
 
     private float mDisplayDensity;
     private float mInvDisplayDensity;
@@ -43,10 +46,14 @@ public class MaterialShadowContainerView extends FrameLayout {
     private int mLightPositionY;
     private int mSpotShadowTranslationX;
     private int mSpotShadowTranslationY;
+
     private float mShadowTranslationZ = 0;
     private float mShadowElevation = 0;
-
+    private boolean mAffectsDisplayedPosition = true;
     private boolean mForceUseCompatShadow = false;
+
+    private boolean mUseAmbientShadow = true;
+    private boolean mUseSpotShadow = true;
 
     private int[] mSpotShadowResourcesIdList;
     private int[] mAmbientShadowResourcesIdList;
@@ -78,11 +85,14 @@ public class MaterialShadowContainerView extends FrameLayout {
         super(context, attrs, defStyleAttr);
 
         final TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MaterialShadowContainerView, 0, 0);
-        final float shadowTranslationZ = ta.getDimension(R.styleable.MaterialShadowContainerView_shadowTranslationZ, mShadowTranslationZ);
-        final float shadowElevation = ta.getDimension(R.styleable.MaterialShadowContainerView_shadowElevation, mShadowElevation);
-        final int spotShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_spotShadowDrawablesList, R.array.ms9_spot_shadow_drawables);
-        final int ambientShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ambientShadowDrawablesList, R.array.ms9_ambient_shadow_drawables);
-        final boolean forceUseCompatShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_forceUseCompatShadow, mForceUseCompatShadow);
+        final float shadowTranslationZ = ta.getDimension(R.styleable.MaterialShadowContainerView_ms9_shadowTranslationZ, mShadowTranslationZ);
+        final float shadowElevation = ta.getDimension(R.styleable.MaterialShadowContainerView_ms9_shadowElevation, mShadowElevation);
+        final int spotShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ms9_spotShadowDrawablesList, R.array.ms9_spot_shadow_drawables);
+        final int ambientShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ms9_ambientShadowDrawablesList, R.array.ms9_ambient_shadow_drawables);
+        final boolean forceUseCompatShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_forceUseCompatShadow, mForceUseCompatShadow);
+        final boolean affectsXYPosition = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_affectsDisplayedPosition, mAffectsDisplayedPosition);
+        final boolean useAmbientShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_useAmbientShadow, mUseAmbientShadow);
+        final boolean useSpotShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_useSpotShadow, mUseSpotShadow);
         ta.recycle();
 
         mSpotShadowResourcesIdList = getResourceIdArray(getResources(), spotShadowLevelListResId);
@@ -96,6 +106,45 @@ public class MaterialShadowContainerView extends FrameLayout {
         mShadowTranslationZ = shadowTranslationZ;
         mShadowElevation = shadowElevation;
         mForceUseCompatShadow = forceUseCompatShadow;
+        mAffectsDisplayedPosition = affectsXYPosition;
+        mUseAmbientShadow = useAmbientShadow;
+        mUseSpotShadow = useSpotShadow;
+
+        updateShadowLevel(true);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState s = new SavedState(superState);
+
+        s.shadowElevation = mShadowElevation;
+        s.shadowTranslationZ = mShadowTranslationZ;
+        s.affectsDisplayedPosition = mAffectsDisplayedPosition;
+        s.forceUseCompatShadow = mForceUseCompatShadow;
+        s.useAmbientShadow = mUseAmbientShadow;
+        s.useSpotShadow = mUseSpotShadow;
+
+        return s;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState s = (SavedState) state;
+
+        super.onRestoreInstanceState(s.getSuperState());
+
+        mShadowElevation = s.shadowElevation;
+        mShadowTranslationZ = s.shadowTranslationZ;
+        mAffectsDisplayedPosition = s.affectsDisplayedPosition;
+        mForceUseCompatShadow = s.forceUseCompatShadow;
+        mUseAmbientShadow = s.useAmbientShadow;
+        mUseSpotShadow = s.useSpotShadow;
 
         updateShadowLevel(true);
     }
@@ -105,14 +154,16 @@ public class MaterialShadowContainerView extends FrameLayout {
         super.onDraw(canvas);
 
         if ((getChildCount() > 0) && (getChildAt(0).getVisibility() == View.VISIBLE)) {
-            if (mCurrentAmbientShadowDrawable1 != null) {
-                mCurrentAmbientShadowDrawable1.draw(canvas);
-            }
-            if (mCurrentAmbientShadowDrawable2 != null) {
-                mCurrentAmbientShadowDrawable2.draw(canvas);
+            if (mUseAmbientShadow) {
+                if (mCurrentAmbientShadowDrawable1 != null) {
+                    mCurrentAmbientShadowDrawable1.draw(canvas);
+                }
+                if (mCurrentAmbientShadowDrawable2 != null) {
+                    mCurrentAmbientShadowDrawable2.draw(canvas);
+                }
             }
 
-            if (mCurrentSpotShadowDrawable1 != null || mCurrentSpotShadowDrawable2 != null) {
+            if (mUseSpotShadow && (mCurrentSpotShadowDrawable1 != null || mCurrentSpotShadowDrawable2 != null)) {
                 final int savedCount = canvas.save(Canvas.MATRIX_SAVE_FLAG);
 
                 canvas.translate(mSpotShadowTranslationX, mSpotShadowTranslationY);
@@ -166,6 +217,20 @@ public class MaterialShadowContainerView extends FrameLayout {
         return mShadowElevation;
     }
 
+    public void setDisplayedPositionAffectionEnabled(boolean enabled) {
+        if (mAffectsDisplayedPosition == enabled) {
+            return;
+        }
+        mAffectsDisplayedPosition = enabled;
+        if (useCompatShadow()) {
+            updateShadowLevel(true);
+        }
+    }
+
+    public boolean isDisplayedPositionAffectionEnabled() {
+        return mAffectsDisplayedPosition;
+    }
+
     public void setForceUseCompatShadow(boolean forceUseCompatShadow) {
         if (mForceUseCompatShadow == forceUseCompatShadow) {
             return;
@@ -193,6 +258,40 @@ public class MaterialShadowContainerView extends FrameLayout {
             return true;
         } else {
             return mForceUseCompatShadow;
+        }
+    }
+
+    public boolean useAmbientShadow() {
+        return mUseAmbientShadow;
+    }
+
+    public void setUseAmbientShadow(boolean useAmbientShadow) {
+        if (mUseAmbientShadow == useAmbientShadow) {
+            return;
+        }
+
+        mUseAmbientShadow = useAmbientShadow;
+
+        // invalidate
+        if (!updateWillNotDraw()) {
+            ViewCompat.postInvalidateOnAnimation(this);
+        }
+    }
+
+    public boolean useSpotShadow() {
+        return mUseSpotShadow;
+    }
+
+    public void setUseSpotShadow(boolean useSpotShadow) {
+        if (mUseSpotShadow == useSpotShadow) {
+            return;
+        }
+
+        mUseSpotShadow = useSpotShadow;
+
+        // invalidate
+        if (!updateWillNotDraw()) {
+            ViewCompat.postInvalidateOnAnimation(this);
         }
     }
 
@@ -323,13 +422,13 @@ public class MaterialShadowContainerView extends FrameLayout {
     }
 
     private boolean updateWillNotDraw() {
+        boolean drawAmbientShadow = (mUseAmbientShadow && (mCurrentAmbientShadowDrawable1 != null || mCurrentAmbientShadowDrawable2 != null));
+        boolean drawSpotShadow = (mUseSpotShadow && (mCurrentSpotShadowDrawable1 != null || mCurrentSpotShadowDrawable2 != null));
         boolean willNotDraw =
-                mCurrentSpotShadowDrawable1 == null &&
-                        mCurrentSpotShadowDrawable2 == null &&
-                        mCurrentAmbientShadowDrawable1 == null &&
-                        mCurrentAmbientShadowDrawable2 == null &&
-                        getBackground() == null &&
-                        getForeground() == null;
+                !drawAmbientShadow &&
+                        !drawSpotShadow &&
+                        (getBackground() == null) &&
+                        (getForeground() == null);
         setWillNotDraw(willNotDraw);
 
         return willNotDraw;
@@ -388,14 +487,22 @@ public class MaterialShadowContainerView extends FrameLayout {
         final float tx = ViewCompat.getTranslationX(childView);
         final float ty = ViewCompat.getTranslationY(childView);
 
-        final int childWidth = childView.getWidth();
-        final int childHeight = childView.getHeight();
+        final float positionRelatedTranslationX;
+        final float positionRelatedTranslationY;
 
-        final int childCenterPosX = mTmpLocations[0] + (childWidth / 2);
-        final int childCenterPosY = mTmpLocations[1] + (childHeight / 2);
+        if (mAffectsDisplayedPosition) {
+            final int childWidth = childView.getWidth();
+            final int childHeight = childView.getHeight();
 
-        final float positionRelatedTranslationX = (float) Math.sqrt((childCenterPosX - mLightPositionX) * mInvDisplayDensity * SPOT_SHADOW_X_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
-        final float positionRelatedTranslationY =  (float) Math.sqrt((childCenterPosY - mLightPositionY) * mInvDisplayDensity * SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
+            final int childCenterPosX = mTmpLocations[0] + (childWidth / 2);
+            final int childCenterPosY = mTmpLocations[1] + (childHeight / 2);
+
+            positionRelatedTranslationX = (float) Math.sqrt((childCenterPosX - mLightPositionX) * mInvDisplayDensity * SPOT_SHADOW_X_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
+            positionRelatedTranslationY = (float) Math.sqrt((childCenterPosY - mLightPositionY) * mInvDisplayDensity * SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT) * zPosition;
+        } else {
+            positionRelatedTranslationX = 0;
+            positionRelatedTranslationY = mDisplayDensity * NON_POSITION_AWARE_SPOT_SHADOW_Y_TRANSLATION_AMOUNT_COEFFICIENT * zPosition;
+        }
 
         mSpotShadowTranslationX = (int) (positionRelatedTranslationX + tx + 0.5f);
         mSpotShadowTranslationY = (int) (positionRelatedTranslationY + ty + 0.5f);
@@ -547,5 +654,57 @@ public class MaterialShadowContainerView extends FrameLayout {
         ta.recycle();
 
         return array;
+    }
+
+    private static class SavedState extends BaseSavedState implements Parcelable {
+        float shadowTranslationZ;
+        float shadowElevation;
+        boolean affectsDisplayedPosition;
+        boolean forceUseCompatShadow;
+        private boolean useAmbientShadow;
+        private boolean useSpotShadow;
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel source) {
+            super(source);
+            shadowTranslationZ = source.readFloat();
+            shadowElevation = source.readFloat();
+            affectsDisplayedPosition = source.readByte() != 0;
+            forceUseCompatShadow = source.readByte() != 0;
+            useAmbientShadow = source.readByte() != 0;
+            useSpotShadow = source.readByte() != 0;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeFloat(shadowTranslationZ);
+            dest.writeFloat(shadowElevation);
+            dest.writeByte((byte) (affectsDisplayedPosition ? 1 : 0));
+            dest.writeByte((byte) (forceUseCompatShadow ? 1 : 0));
+            dest.writeByte((byte) (useAmbientShadow ? 1 : 0));
+            dest.writeByte((byte) (useSpotShadow ? 1 : 0));
+        }
+
+        @SuppressWarnings("unused")
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }
