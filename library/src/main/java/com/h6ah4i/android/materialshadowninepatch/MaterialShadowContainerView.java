@@ -635,6 +635,7 @@ public class MaterialShadowContainerView extends FrameLayout {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
             dest.writeFloat(shadowTranslationZ);
             dest.writeFloat(shadowElevation);
             dest.writeByte((byte) (affectsDisplayedPosition ? 1 : 0));
