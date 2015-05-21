@@ -41,6 +41,9 @@
         <activity android:name=".ZPositionAnimationDemoActivity"
                   android:label="@string/z_position_animation_demo" />
 
+        <activity android:name=".ShadowStylesDemoActivity"
+                  android:label="@string/shadow_styles_demo" />
+
     </application>
 
 </manifest>

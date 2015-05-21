@@ -17,8 +17,9 @@
 
 svg_file=$1
 dest_dir=$2
-num_drawables=$3
-res_prefix=$4
+num_amb_spot_drawables=$3
+num_composite_drawables=$4
+res_prefix=$5
 
 # resolve commands
 if command -v parallel >/dev/null 2>&1; then
@@ -55,12 +56,17 @@ function inkscape_export_shadow_objs {
         $inkscape_export_obj $svg_file $dest_dir/$out_prefix""$name"_z"{}"_x"$scale".9.png" $name"_z"{} $scale
 }
 
-inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_drawables 1 $res_prefix
-inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_drawables 2 $res_prefix
-inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_drawables 3 $res_prefix
-inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_drawables 4 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_amb_spot_drawables 1 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_amb_spot_drawables 2 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_amb_spot_drawables 3 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "ambient_shadow" $num_amb_spot_drawables 4 $res_prefix
 
-inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_drawables 1 $res_prefix
-inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_drawables 2 $res_prefix
-inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_drawables 3 $res_prefix
-inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_drawables 4 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_amb_spot_drawables 1 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_amb_spot_drawables 2 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_amb_spot_drawables 3 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "spot_shadow" $num_amb_spot_drawables 4 $res_prefix
+
+inkscape_export_shadow_objs $svg_file $dest_dir "composite_shadow" $num_composite_drawables 1 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "composite_shadow" $num_composite_drawables 2 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "composite_shadow" $num_composite_drawables 3 $res_prefix
+inkscape_export_shadow_objs $svg_file $dest_dir "composite_shadow" $num_composite_drawables 4 $res_prefix

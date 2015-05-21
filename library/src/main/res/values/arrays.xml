@@ -60,4 +60,17 @@
         <item>@drawable/ms9_spot_shadow_z18</item>
     </array>
 
+    <array name="ms9_composite_shadow_drawables">
+        <item>@null</item>
+        <item>@drawable/ms9_composite_shadow_z1</item>
+        <item>@drawable/ms9_composite_shadow_z2</item>
+        <item>@drawable/ms9_composite_shadow_z3</item>
+        <item>@drawable/ms9_composite_shadow_z4</item>
+        <item>@drawable/ms9_composite_shadow_z5</item>
+        <item>@drawable/ms9_composite_shadow_z6</item>
+        <item>@drawable/ms9_composite_shadow_z7</item>
+        <item>@drawable/ms9_composite_shadow_z8</item>
+        <item>@drawable/ms9_composite_shadow_z9</item>
+    </array>
+
 </resources>

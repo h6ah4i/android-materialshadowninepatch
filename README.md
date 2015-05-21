@@ -22,7 +22,7 @@ Target platforms
 Latest version
 ---
 
-- Version 0.6.1  (May 22, 2015)
+- Version 0.6.2  (May 22, 2015)
 
 Getting started
 ---
@@ -31,7 +31,7 @@ This library is published on jCenter. Just add these lines to `build.gradle`.
 
 ```groovy
 dependencies {
-    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.1'
+    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.2'
 }
 ```
 
@@ -42,6 +42,7 @@ Usage
 
 ```xml
 <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+    style="@style/ms9_DefaultShadowStyle"
     android:id="@+id/shadow_item_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -80,6 +81,7 @@ Advanced Usages
 
 ```xml
 <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+    style="@style/ms9_DefaultShadowStyle"
     android:id="@+id/shadow_item_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -107,6 +109,16 @@ Advanced Usages
 | `app:ms9_useSpotShadow`          | `true`                                | Specify whether to use spot shadow                                      |
 | `ms9_spotShadowDrawablesList`    | `@array/ms9_spot_shadow_drawables`    | Specify *Spot shadow (Key shadow)* 9-patch resources                    |
 | `ms9_ambientShadowDrawablesList` | `@array/ms9_ambient_shadow_drawables` | Specify *Ambient shadow* 9-patch resources                              |
+
+
+| Style name                                           |                                                                            |
+|------------------------------------------------------|----------------------------------------------------------------------------|
+| `ms9_DefaultShadowStyle`                             | Default style (uses spot & ambient shadow, position affects)               |
+| `ms9_DefaultShadowStyleCompatOnly`                   | Default style with `ms9_forceUseCompatShadow="true"`                       |
+| `ms9_NoDisplayedPositionAffectShadowStyle`           | No displayed position affects style                                        |
+| `ms9_NoDisplayedPositionAffectShadowStyleCompatOnly` | No displayed position affects style with `ms9_forceUseCompatShadow="true"` |
+| `ms9_CompositeShadowStyle`                           | Pre-composite shadow style (**less overdraws**)                            |
+| `ms9_CompositeShadowStyleCompatOnly`                 | Pre-composite shadow style with `ms9_forceUseCompatShadow="true"`          |
 
 
 License
