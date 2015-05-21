@@ -37,4 +37,10 @@
         android:layout_height="56dp"
         android:text="@string/z_position_animation_demo" />
 
+    <Button
+        android:id="@+id/button_shadow_styles_demo"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/shadow_styles_demo" />
+
 </LinearLayout>

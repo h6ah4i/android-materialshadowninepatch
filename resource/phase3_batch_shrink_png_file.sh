@@ -17,8 +17,9 @@
 
 src_dir=$1
 dest_dir=$2
-num_drawables=$3
-res_prefix=$4
+num_amb_spot_drawables=$3
+num_composite_drawables=$4
+res_prefix=$5
 
 
 # resolve commands

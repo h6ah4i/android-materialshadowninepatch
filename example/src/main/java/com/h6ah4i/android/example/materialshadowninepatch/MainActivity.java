@@ -34,6 +34,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         findViewById(R.id.button_z_position_demo).setOnClickListener(this);
         findViewById(R.id.button_xy_position_demo).setOnClickListener(this);
         findViewById(R.id.button_z_position_animation_demo).setOnClickListener(this);
+        findViewById(R.id.button_shadow_styles_demo).setOnClickListener(this);
 
         /** {@link android.util.Property} is only available on API level 14 or later */
         findViewById(R.id.button_z_position_animation_demo).setEnabled(
@@ -51,6 +52,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             case R.id.button_z_position_animation_demo:
                 launchActivity(ZPositionAnimationDemoActivity.class);
+                break;
+            case R.id.button_shadow_styles_demo:
+                launchActivity(ShadowStylesDemoActivity.class);
                 break;
             default:
                 break;
