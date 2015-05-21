@@ -22,7 +22,7 @@ Target platforms
 Latest version
 ---
 
-- Version 0.6.0  (May 17, 2015)
+- Version 0.6.1  (May 22, 2015)
 
 Getting started
 ---
@@ -31,7 +31,7 @@ This library is published on jCenter. Just add these lines to `build.gradle`.
 
 ```groovy
 dependencies {
-    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.0'
+    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.1'
 }
 ```
 
@@ -85,6 +85,8 @@ Advanced Usages
     android:layout_height="wrap_content"
     app:ms9_shadowTranslationZ="2dp"
     app:ms9_shadowElevation="4dp"
+    app:ms9_useAmbientShadow="true"
+    app:ms9_useSpotShadow="true"
     app:ms9_forceUseCompatShadow="true"
     app:ms9_affectsDisplayedPosition="true"
     app:ms9_spotShadowDrawablesList="@array/ms9_spot_shadow_drawables"
@@ -101,6 +103,8 @@ Advanced Usages
 | `ms9_shadowElevation`            | `0dp`                                 | Compatibility version of `android:elevation`                            | 
 | `ms9_forceUseCompatShadow`       | `false`                               | Enforces to use compatibility shadow on Lollipop or later               |
 | `ms9_affectsDisplayedPosition`   | `true`                                | Specify whether the shadow position is affected by the target view's position (emulates Lollipop's behavior) |
+| `app:ms9_useAmbientShadow`       | `true`                                | Specify whether to use ambient shadow                                   |
+| `app:ms9_useSpotShadow`          | `true`                                | Specify whether to use spot shadow                                      |
 | `ms9_spotShadowDrawablesList`    | `@array/ms9_spot_shadow_drawables`    | Specify *Spot shadow (Key shadow)* 9-patch resources                    |
 | `ms9_ambientShadowDrawablesList` | `@array/ms9_ambient_shadow_drawables` | Specify *Ambient shadow* 9-patch resources                              |
 
