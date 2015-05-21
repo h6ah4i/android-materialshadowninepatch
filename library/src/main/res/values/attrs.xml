@@ -23,5 +23,7 @@
         <attr name="ms9_ambientShadowDrawablesList" format="reference" />
         <attr name="ms9_forceUseCompatShadow" format="boolean" />
         <attr name="ms9_affectsDisplayedPosition" format="boolean" />
+        <attr name="ms9_useAmbientShadow" format="boolean" />
+        <attr name="ms9_useSpotShadow" format="boolean" />
     </declare-styleable>
 </resources>

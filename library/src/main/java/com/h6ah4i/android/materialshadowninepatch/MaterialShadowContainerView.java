@@ -29,7 +29,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Property;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -52,6 +51,9 @@ public class MaterialShadowContainerView extends FrameLayout {
     private float mShadowElevation = 0;
     private boolean mAffectsDisplayedPosition = true;
     private boolean mForceUseCompatShadow = false;
+
+    private boolean mUseAmbientShadow = true;
+    private boolean mUseSpotShadow = true;
 
     private int[] mSpotShadowResourcesIdList;
     private int[] mAmbientShadowResourcesIdList;
@@ -89,6 +91,8 @@ public class MaterialShadowContainerView extends FrameLayout {
         final int ambientShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ms9_ambientShadowDrawablesList, R.array.ms9_ambient_shadow_drawables);
         final boolean forceUseCompatShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_forceUseCompatShadow, mForceUseCompatShadow);
         final boolean affectsXYPosition = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_affectsDisplayedPosition, mAffectsDisplayedPosition);
+        final boolean useAmbientShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_useAmbientShadow, mUseAmbientShadow);
+        final boolean useSpotShadow = ta.getBoolean(R.styleable.MaterialShadowContainerView_ms9_useSpotShadow, mUseSpotShadow);
         ta.recycle();
 
         mSpotShadowResourcesIdList = getResourceIdArray(getResources(), spotShadowLevelListResId);
@@ -103,6 +107,8 @@ public class MaterialShadowContainerView extends FrameLayout {
         mShadowElevation = shadowElevation;
         mForceUseCompatShadow = forceUseCompatShadow;
         mAffectsDisplayedPosition = affectsXYPosition;
+        mUseAmbientShadow = useAmbientShadow;
+        mUseSpotShadow = useSpotShadow;
 
         updateShadowLevel(true);
     }
@@ -116,6 +122,8 @@ public class MaterialShadowContainerView extends FrameLayout {
         s.shadowTranslationZ = mShadowTranslationZ;
         s.affectsDisplayedPosition = mAffectsDisplayedPosition;
         s.forceUseCompatShadow = mForceUseCompatShadow;
+        s.useAmbientShadow = mUseAmbientShadow;
+        s.useSpotShadow = mUseSpotShadow;
 
         return s;
     }
@@ -135,6 +143,8 @@ public class MaterialShadowContainerView extends FrameLayout {
         mShadowTranslationZ = s.shadowTranslationZ;
         mAffectsDisplayedPosition = s.affectsDisplayedPosition;
         mForceUseCompatShadow = s.forceUseCompatShadow;
+        mUseAmbientShadow = s.useAmbientShadow;
+        mUseSpotShadow = s.useSpotShadow;
 
         updateShadowLevel(true);
     }
@@ -144,14 +154,16 @@ public class MaterialShadowContainerView extends FrameLayout {
         super.onDraw(canvas);
 
         if ((getChildCount() > 0) && (getChildAt(0).getVisibility() == View.VISIBLE)) {
-            if (mCurrentAmbientShadowDrawable1 != null) {
-                mCurrentAmbientShadowDrawable1.draw(canvas);
-            }
-            if (mCurrentAmbientShadowDrawable2 != null) {
-                mCurrentAmbientShadowDrawable2.draw(canvas);
+            if (mUseAmbientShadow) {
+                if (mCurrentAmbientShadowDrawable1 != null) {
+                    mCurrentAmbientShadowDrawable1.draw(canvas);
+                }
+                if (mCurrentAmbientShadowDrawable2 != null) {
+                    mCurrentAmbientShadowDrawable2.draw(canvas);
+                }
             }
 
-            if (mCurrentSpotShadowDrawable1 != null || mCurrentSpotShadowDrawable2 != null) {
+            if (mUseSpotShadow && (mCurrentSpotShadowDrawable1 != null || mCurrentSpotShadowDrawable2 != null)) {
                 final int savedCount = canvas.save(Canvas.MATRIX_SAVE_FLAG);
 
                 canvas.translate(mSpotShadowTranslationX, mSpotShadowTranslationY);
@@ -246,6 +258,40 @@ public class MaterialShadowContainerView extends FrameLayout {
             return true;
         } else {
             return mForceUseCompatShadow;
+        }
+    }
+
+    public boolean useAmbientShadow() {
+        return mUseAmbientShadow;
+    }
+
+    public void setUseAmbientShadow(boolean useAmbientShadow) {
+        if (mUseAmbientShadow == useAmbientShadow) {
+            return;
+        }
+
+        mUseAmbientShadow = useAmbientShadow;
+
+        // invalidate
+        if (!updateWillNotDraw()) {
+            ViewCompat.postInvalidateOnAnimation(this);
+        }
+    }
+
+    public boolean useSpotShadow() {
+        return mUseSpotShadow;
+    }
+
+    public void setUseSpotShadow(boolean useSpotShadow) {
+        if (mUseSpotShadow == useSpotShadow) {
+            return;
+        }
+
+        mUseSpotShadow = useSpotShadow;
+
+        // invalidate
+        if (!updateWillNotDraw()) {
+            ViewCompat.postInvalidateOnAnimation(this);
         }
     }
 
@@ -376,13 +422,13 @@ public class MaterialShadowContainerView extends FrameLayout {
     }
 
     private boolean updateWillNotDraw() {
+        boolean drawAmbientShadow = (mUseAmbientShadow && (mCurrentAmbientShadowDrawable1 != null || mCurrentAmbientShadowDrawable2 != null));
+        boolean drawSpotShadow = (mUseSpotShadow && (mCurrentSpotShadowDrawable1 != null || mCurrentSpotShadowDrawable2 != null));
         boolean willNotDraw =
-                mCurrentSpotShadowDrawable1 == null &&
-                        mCurrentSpotShadowDrawable2 == null &&
-                        mCurrentAmbientShadowDrawable1 == null &&
-                        mCurrentAmbientShadowDrawable2 == null &&
-                        getBackground() == null &&
-                        getForeground() == null;
+                !drawAmbientShadow &&
+                        !drawSpotShadow &&
+                        (getBackground() == null) &&
+                        (getForeground() == null);
         setWillNotDraw(willNotDraw);
 
         return willNotDraw;
@@ -615,6 +661,8 @@ public class MaterialShadowContainerView extends FrameLayout {
         float shadowElevation;
         boolean affectsDisplayedPosition;
         boolean forceUseCompatShadow;
+        private boolean useAmbientShadow;
+        private boolean useSpotShadow;
 
         public SavedState(Parcelable superState) {
             super(superState);
@@ -626,6 +674,8 @@ public class MaterialShadowContainerView extends FrameLayout {
             shadowElevation = source.readFloat();
             affectsDisplayedPosition = source.readByte() != 0;
             forceUseCompatShadow = source.readByte() != 0;
+            useAmbientShadow = source.readByte() != 0;
+            useSpotShadow = source.readByte() != 0;
         }
 
         @Override
@@ -640,6 +690,8 @@ public class MaterialShadowContainerView extends FrameLayout {
             dest.writeFloat(shadowElevation);
             dest.writeByte((byte) (affectsDisplayedPosition ? 1 : 0));
             dest.writeByte((byte) (forceUseCompatShadow ? 1 : 0));
+            dest.writeByte((byte) (useAmbientShadow ? 1 : 0));
+            dest.writeByte((byte) (useSpotShadow ? 1 : 0));
         }
 
         @SuppressWarnings("unused")
