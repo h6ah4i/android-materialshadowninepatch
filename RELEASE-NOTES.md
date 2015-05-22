@@ -1,3 +1,7 @@
+## 0.6.2
+- Added pre-composite nine patch resources
+- Introduced `MaterialShadowContainerView` styles
+
 ## 0.6.1
 - Fixed BadParcelableException issue (#5)
 - Added `ms9_useAmbientShadow` property

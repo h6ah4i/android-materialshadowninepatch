@@ -17,9 +17,9 @@
 
 src_dir=$1
 dest_dir=$2
-num_drawables=$3
-res_prefix=$4
-
+num_amb_spot_drawables=$3
+num_composite_drawables=$4
+res_prefix=$5
 
 # resolve commands
 if command -v parallel >/dev/null 2>&1; then
@@ -50,8 +50,8 @@ function batch_crop_niniepatch_valid_area {
     local target_list=$(find $src_dir -maxdepth 1 -type f -name "*_x"$scale"*.png" | gawk -F/ '{print $NF}' | sort -n)
 
     echo "$target_list" | \
-    	$iterator_cmd $iterator_cmd_opt \
-    	$crop_ninepatch_valid_area $src_dir/{} $dest_dir/{} $crop_pixels
+        $iterator_cmd $iterator_cmd_opt \
+        $crop_ninepatch_valid_area $src_dir/{} $dest_dir/{} $crop_pixels
 }
 
 batch_crop_niniepatch_valid_area $src_dir $dest_dir 1
