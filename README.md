@@ -92,8 +92,8 @@ Advanced Usages
     app:ms9_useSpotShadow="true"
     app:ms9_forceUseCompatShadow="true"
     app:ms9_affectsDisplayedPosition="true"
-    app:ms9_spotShadowDrawablesList="@array/ms9_spot_shadow_drawables"
-    app:ms9_ambientShadowDrawablesList="@array/ms9_ambient_shadow_drawables">
+    app:ms9_spotShadowDrawablesList="@array/ms9_spot_shadow_drawables_z18"
+    app:ms9_ambientShadowDrawablesList="@array/ms9_ambient_shadow_drawables_z18">
 
     ...
 
@@ -103,7 +103,7 @@ Advanced Usages
 | Property name                    | Default                               | Description                                                             |
 |----------------------------------|---------------------------------------|-------------------------------------------------------------------------|
 | `ms9_shadowTranslationZ`         | `0dp`                                 | Compatibility version of `android:translationZ`                         |
-| `ms9_shadowElevation`            | `0dp`                                 | Compatibility version of `android:elevation`                            | 
+| `ms9_shadowElevation`            | `0dp`                                 | Compatibility version of `android:elevation`                            |
 | `ms9_forceUseCompatShadow`       | `false`                               | Enforces to use compatibility shadow on Lollipop or later               |
 | `ms9_affectsDisplayedPosition`   | `true`                                | Specify whether the shadow position is affected by the target view's position (emulates Lollipop's behavior) |
 | `app:ms9_useAmbientShadow`       | `true`                                | Specify whether to use ambient shadow                                   |
@@ -114,13 +114,14 @@ Advanced Usages
 
 | Style name                                           |                                                                            |
 |------------------------------------------------------|----------------------------------------------------------------------------|
-| `ms9_DefaultShadowStyle`                             | Default style (uses spot & ambient shadow, position affects)               |
-| `ms9_DefaultShadowStyleCompatOnly`                   | Default style with `ms9_forceUseCompatShadow="true"`                       |
-| `ms9_NoDisplayedPositionAffectShadowStyle`           | No displayed position affects style                                        |
-| `ms9_NoDisplayedPositionAffectShadowStyleCompatOnly` | No displayed position affects style with `ms9_forceUseCompatShadow="true"` |
-| `ms9_CompositeShadowStyle`                           | Pre-composite shadow style (**less overdraws**)                            |
-| `ms9_CompositeShadowStyleCompatOnly`                 | Pre-composite shadow style with `ms9_forceUseCompatShadow="true"`          |
+| `ms9_DefaultShadowStyle([ Z6 or Z9 orZ18 ])`                             | Default style (uses spot & ambient shadow, position affects)               |
+| `ms9_DefaultShadowStyle([ Z6 or Z9 or Z18 ])CompatOnly`                   | Default style with `ms9_forceUseCompatShadow="true"`                       |
+| `ms9_NoDisplayedPositionAffectShadowStyle([ Z6 or Z9 or Z18 ])`           | No displayed position affects style                                        |
+| `ms9_NoDisplayedPositionAffectShadowStyle([ Z6 or Z9 or Z18 ])CompatOnly` | No displayed position affects style with `ms9_forceUseCompatShadow="true"` |
+| `ms9_CompositeShadowStyle([ Z6 or Z9 ])`                                 | Pre-composite shadow style (**less overdraws**)                            |
+| `ms9_CompositeShadowStyle([ Z6 or Z9 ])CompatOnly`                       | Pre-composite shadow style with `ms9_forceUseCompatShadow="true"`          |
 
+*NOTE: You can specify `Z[6|9|18]` suffix for style names. This limits the deepest limit of shadow nine patch resources and it makes resource shrinking (`shrinkResources true`) work more effectively!*
 
 License
 ---
