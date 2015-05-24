@@ -1,34 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources 
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:shrinkMode="strict">
 
-    <style name="ms9_DefaultShadowStyle">
-        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables</item>
-        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables</item>
+    <!-- =================================================== -->
+
+    <style name="ms9_DefaultShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@null</item>
+        <item name="ms9_spotShadowDrawablesList">@null</item>
         <item name="ms9_forceUseCompatShadow">false</item>
         <item name="ms9_affectsDisplayedPosition">true</item>
         <item name="ms9_useAmbientShadow">true</item>
         <item name="ms9_useSpotShadow">true</item>
     </style>
 
+    <!-- Z depth: upto 18 dp -->
+    <style name="ms9_DefaultShadowStyle" parent="ms9_DefaultShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z18</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z18</item>
+    </style>
+
     <style name="ms9_DefaultShadowStyleCompatOnly" parent="ms9_DefaultShadowStyle">
         <item name="ms9_forceUseCompatShadow">true</item>
     </style>
 
-    <style name="ms9_NoDisplayedPositionAffectShadowStyle">
-        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables</item>
-        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables</item>
+    <!-- Z depth: upto 18 dp -->
+    <style name="ms9_DefaultShadowStyleZ18" parent="ms9_DefaultShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z18</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z18</item>
+    </style>
+
+    <style name="ms9_DefaultShadowStyleZ18CompatOnly" parent="ms9_DefaultShadowStyleZ18">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+
+    <!-- Z depth: upto 9 dp (If deeper depth shadows are not required, `shrinkResources` true works more effectively!) -->
+    <style name="ms9_DefaultShadowStyleZ9" parent="ms9_DefaultShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z9</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z9</item>
+    </style>
+
+    <style name="ms9_DefaultShadowStyleZ9CompatOnly" parent="ms9_DefaultShadowStyleZ9">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+
+    <!-- Z depth: upto 6 dp (If deeper depth shadows are not required, `shrinkResources` true works more effectively!) -->
+    <style name="ms9_DefaultShadowStyleZ6" parent="ms9_DefaultShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z6</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z6</item>
+    </style>
+
+    <style name="ms9_DefaultShadowStyleZ6CompatOnly" parent="ms9_DefaultShadowStyleZ6">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+
+
+    <!-- =================================================== -->
+
+
+    <style name="ms9_NoDisplayedPositionAffectShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@null</item>
+        <item name="ms9_spotShadowDrawablesList">@null</item>
         <item name="ms9_forceUseCompatShadow">false</item>
         <item name="ms9_affectsDisplayedPosition">false</item>
         <item name="ms9_useAmbientShadow">true</item>
         <item name="ms9_useSpotShadow">true</item>
     </style>
 
+    <!-- Z depth: upto 18 dp -->
+    <style name="ms9_NoDisplayedPositionAffectShadowStyle" parent="ms9_NoDisplayedPositionAffectShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z18</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z18</item>
+    </style>
+
     <style name="ms9_NoDisplayedPositionAffectShadowStyleCompatOnly" parent="ms9_NoDisplayedPositionAffectShadowStyle">
         <item name="ms9_forceUseCompatShadow">true</item>
     </style>
 
-    <style name="ms9_CompositeShadowStyle">
-        <item name="ms9_ambientShadowDrawablesList">@array/ms9_composite_shadow_drawables</item>
+    <!-- Z depth: upto 18 dp -->
+    <style name="ms9_NoDisplayedPositionAffectShadowStyleZ18" parent="ms9_NoDisplayedPositionAffectShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z18</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z18</item>
+    </style>
+
+    <style name="ms9_NoDisplayedPositionAffectShadowStyleZ18CompatOnly" parent="ms9_NoDisplayedPositionAffectShadowStyleZ18">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+
+    <!-- Z depth: upto 9 dp (If deeper depth shadows are not required, `shrinkResources` true works more effectively!) -->
+    <style name="ms9_NoDisplayedPositionAffectShadowStyleZ9" parent="ms9_NoDisplayedPositionAffectShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z9</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z9</item>
+    </style>
+
+    <style name="ms9_NoDisplayedPositionAffectShadowStyleZ9CompatOnly" parent="ms9_NoDisplayedPositionAffectShadowStyleZ9">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+    
+    <!-- Z depth: upto 6 dp (If deeper depth shadows are not required, `shrinkResources` true works more effectively!) -->
+    <style name="ms9_NoDisplayedPositionAffectShadowStyleZ6" parent="ms9_NoDisplayedPositionAffectShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_ambient_shadow_drawables_z6</item>
+        <item name="ms9_spotShadowDrawablesList">@array/ms9_spot_shadow_drawables_z6</item>
+    </style>
+
+    <style name="ms9_NoDisplayedPositionAffectShadowStyleZ6CompatOnly" parent="ms9_NoDisplayedPositionAffectShadowStyleZ6">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+
+
+    <!-- =================================================== -->
+
+
+    <!-- Z depth: upto 9 dp -->
+    <style name="ms9_CompositeShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@null</item>
         <item name="ms9_spotShadowDrawablesList">@null</item>
         <item name="ms9_forceUseCompatShadow">false</item>
         <item name="ms9_affectsDisplayedPosition">false</item>
@@ -36,7 +121,30 @@
         <item name="ms9_useSpotShadow">false</item>
     </style>
 
+    <!-- Z depth: upto 9 dp -->
+    <style name="ms9_CompositeShadowStyle" parent="ms9_CompositeShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_composite_shadow_drawables_z9</item>
+    </style>
+
     <style name="ms9_CompositeShadowStyleCompatOnly" parent="ms9_CompositeShadowStyle">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+
+    <!-- Z depth: upto 9 dp -->
+    <style name="ms9_CompositeShadowStyleZ9" parent="ms9_CompositeShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_composite_shadow_drawables_z9</item>
+    </style>
+
+    <style name="ms9_CompositeShadowStyleZ9CompatOnly" parent="ms9_CompositeShadowStyleZ9">
+        <item name="ms9_forceUseCompatShadow">true</item>
+    </style>
+
+    <!-- Z depth: upto 6 dp (If deeper depth shadows are not required, `shrinkResources` true works more effectively!) -->
+    <style name="ms9_CompositeShadowStyleZ6" parent="ms9_CompositeShadowStyleBase">
+        <item name="ms9_ambientShadowDrawablesList">@array/ms9_composite_shadow_drawables_z6</item>
+    </style>
+
+    <style name="ms9_CompositeShadowStyleZ6CompatOnly" parent="ms9_CompositeShadowStyleZ6">
         <item name="ms9_forceUseCompatShadow">true</item>
     </style>
 

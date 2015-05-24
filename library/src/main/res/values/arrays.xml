@@ -14,9 +14,57 @@
        See the License for the specific language governing permissions and
        limitations under the License.
 -->
-<resources>
+<resources 
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:shrinkMode="strict">
 
-    <array name="ms9_ambient_shadow_drawables">
+    <array name="ms9_ambient_shadow_drawables_z6">
+        <item>@null</item>
+        <item>@drawable/ms9_ambient_shadow_z1</item>
+        <item>@drawable/ms9_ambient_shadow_z2</item>
+        <item>@drawable/ms9_ambient_shadow_z3</item>
+        <item>@drawable/ms9_ambient_shadow_z4</item>
+        <item>@drawable/ms9_ambient_shadow_z5</item>
+        <item>@drawable/ms9_ambient_shadow_z6</item>
+    </array>
+
+    <array name="ms9_spot_shadow_drawables_z6">
+        <item>@null</item>
+        <item>@drawable/ms9_spot_shadow_z1</item>
+        <item>@drawable/ms9_spot_shadow_z2</item>
+        <item>@drawable/ms9_spot_shadow_z3</item>
+        <item>@drawable/ms9_spot_shadow_z4</item>
+        <item>@drawable/ms9_spot_shadow_z5</item>
+        <item>@drawable/ms9_spot_shadow_z6</item>
+    </array>
+
+    <array name="ms9_ambient_shadow_drawables_z9">
+        <item>@null</item>
+        <item>@drawable/ms9_ambient_shadow_z1</item>
+        <item>@drawable/ms9_ambient_shadow_z2</item>
+        <item>@drawable/ms9_ambient_shadow_z3</item>
+        <item>@drawable/ms9_ambient_shadow_z4</item>
+        <item>@drawable/ms9_ambient_shadow_z5</item>
+        <item>@drawable/ms9_ambient_shadow_z6</item>
+        <item>@drawable/ms9_ambient_shadow_z7</item>
+        <item>@drawable/ms9_ambient_shadow_z8</item>
+        <item>@drawable/ms9_ambient_shadow_z9</item>
+    </array>
+
+    <array name="ms9_spot_shadow_drawables_z9">
+        <item>@null</item>
+        <item>@drawable/ms9_spot_shadow_z1</item>
+        <item>@drawable/ms9_spot_shadow_z2</item>
+        <item>@drawable/ms9_spot_shadow_z3</item>
+        <item>@drawable/ms9_spot_shadow_z4</item>
+        <item>@drawable/ms9_spot_shadow_z5</item>
+        <item>@drawable/ms9_spot_shadow_z6</item>
+        <item>@drawable/ms9_spot_shadow_z7</item>
+        <item>@drawable/ms9_spot_shadow_z8</item>
+        <item>@drawable/ms9_spot_shadow_z9</item>
+    </array>
+
+    <array name="ms9_ambient_shadow_drawables_z18">
         <item>@null</item>
         <item>@drawable/ms9_ambient_shadow_z1</item>
         <item>@drawable/ms9_ambient_shadow_z2</item>
@@ -38,7 +86,7 @@
         <item>@drawable/ms9_ambient_shadow_z18</item>
     </array>
 
-    <array name="ms9_spot_shadow_drawables">
+    <array name="ms9_spot_shadow_drawables_z18">
         <item>@null</item>
         <item>@drawable/ms9_spot_shadow_z1</item>
         <item>@drawable/ms9_spot_shadow_z2</item>
@@ -60,7 +108,17 @@
         <item>@drawable/ms9_spot_shadow_z18</item>
     </array>
 
-    <array name="ms9_composite_shadow_drawables">
+    <array name="ms9_composite_shadow_drawables_z6">
+        <item>@null</item>
+        <item>@drawable/ms9_composite_shadow_z1</item>
+        <item>@drawable/ms9_composite_shadow_z2</item>
+        <item>@drawable/ms9_composite_shadow_z3</item>
+        <item>@drawable/ms9_composite_shadow_z4</item>
+        <item>@drawable/ms9_composite_shadow_z5</item>
+        <item>@drawable/ms9_composite_shadow_z6</item>
+    </array>
+
+    <array name="ms9_composite_shadow_drawables_z9">
         <item>@null</item>
         <item>@drawable/ms9_composite_shadow_z1</item>
         <item>@drawable/ms9_composite_shadow_z2</item>
