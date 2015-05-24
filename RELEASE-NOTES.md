@@ -1,3 +1,6 @@
+## 0.6.3
+- Added new styles in order to make resource shrinking work more aggressively
+
 ## 0.6.2
 - Added pre-composite nine patch resources
 - Introduced `MaterialShadowContainerView` styles
