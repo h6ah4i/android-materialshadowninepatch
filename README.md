@@ -43,6 +43,8 @@ Usage
 
 ```xml
 <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ms9_DefaultShadowStyle"
     android:id="@+id/shadow_item_container"
     android:layout_width="wrap_content"
@@ -82,6 +84,8 @@ Advanced Usages
 
 ```xml
 <com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ms9_DefaultShadowStyle"
     android:id="@+id/shadow_item_container"
     android:layout_width="wrap_content"
