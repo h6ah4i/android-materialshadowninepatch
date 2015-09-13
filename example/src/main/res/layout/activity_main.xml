@@ -43,4 +43,10 @@
         android:layout_height="56dp"
         android:text="@string/shadow_styles_demo" />
 
+    <Button
+        android:id="@+id/button_programmatically_add_demo"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/programmatically_add_demo" />
+
 </LinearLayout>
