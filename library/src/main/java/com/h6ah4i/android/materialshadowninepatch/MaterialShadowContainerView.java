@@ -82,9 +82,13 @@ public class MaterialShadowContainerView extends FrameLayout {
     }
 
     public MaterialShadowContainerView(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs, defStyleAttr, 0);
+    }
+
+    public MaterialShadowContainerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr);
 
-        final TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MaterialShadowContainerView, 0, 0);
+        final TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.MaterialShadowContainerView, defStyleAttr, defStyleRes);
         final float shadowTranslationZ = ta.getDimension(R.styleable.MaterialShadowContainerView_ms9_shadowTranslationZ, mShadowTranslationZ);
         final float shadowElevation = ta.getDimension(R.styleable.MaterialShadowContainerView_ms9_shadowElevation, mShadowElevation);
         final int spotShadowLevelListResId = ta.getResourceId(R.styleable.MaterialShadowContainerView_ms9_spotShadowDrawablesList, 0);
