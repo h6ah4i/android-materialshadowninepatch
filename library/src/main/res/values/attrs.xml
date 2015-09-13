@@ -16,7 +16,7 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <declare-styleable name="MaterialShadowContainerView">
+    <declare-styleable name="ms9_MaterialShadowContainerView">
         <attr name="ms9_shadowTranslationZ" format="dimension" />
         <attr name="ms9_shadowElevation" format="dimension" />
         <attr name="ms9_spotShadowDrawablesList" format="reference" />

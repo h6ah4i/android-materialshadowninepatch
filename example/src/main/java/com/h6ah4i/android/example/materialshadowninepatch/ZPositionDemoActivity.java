@@ -17,9 +17,9 @@
 package com.h6ah4i.android.example.materialshadowninepatch;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
-public class ZPositionDemoActivity extends ActionBarActivity {
+public class ZPositionDemoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

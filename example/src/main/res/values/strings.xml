@@ -19,4 +19,5 @@
     <string name="xy_position_demo">XY position demo</string>
     <string name="z_position_animation_demo">Z position animation demo</string>
     <string name="shadow_styles_demo">Shadow styles demo</string>
+    <string name="programmatically_add_demo">Programmatically add demo</string>
 </resources>

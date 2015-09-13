@@ -20,10 +20,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         findViewById(R.id.button_xy_position_demo).setOnClickListener(this);
         findViewById(R.id.button_z_position_animation_demo).setOnClickListener(this);
         findViewById(R.id.button_shadow_styles_demo).setOnClickListener(this);
+        findViewById(R.id.button_programmatically_add_demo).setOnClickListener(this);
 
         /** {@link android.util.Property} is only available on API level 14 or later */
         findViewById(R.id.button_z_position_animation_demo).setEnabled(
@@ -55,6 +56,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 break;
             case R.id.button_shadow_styles_demo:
                 launchActivity(ShadowStylesDemoActivity.class);
+                break;
+            case R.id.button_programmatically_add_demo:
+                launchActivity(ProgrammaticallyAddDemoActivity.class);
                 break;
             default:
                 break;
