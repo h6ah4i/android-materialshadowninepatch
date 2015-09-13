@@ -1,3 +1,7 @@
+## 0.6.4
+- Added four-paramer constructor to MaterialShadowContainerView
+- Add a new demo: "Programmatically add demo"
+
 ## 0.6.3
 - Added new styles in order to make resource shrinking work more aggressively
 
