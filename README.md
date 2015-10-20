@@ -23,7 +23,7 @@ Target platforms
 Latest version
 ---
 
-- Version 0.6.4  (Sep. 13, 2015)
+- Version 0.6.5  (Oct. 20, 2015)
 
 Getting started
 ---
@@ -32,7 +32,7 @@ This library is published on jCenter. Just add these lines to `build.gradle`.
 
 ```groovy
 dependencies {
-    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.4'
+    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.5'
 }
 ```
 
