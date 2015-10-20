@@ -1,3 +1,7 @@
+## 0.6.5
+- Shrinked PNG image files
+- Add tools:shrinkMode="strict" to all drawable resources
+
 ## 0.6.4
 - Added four-paramer constructor to MaterialShadowContainerView
 - Add a new demo: "Programmatically add demo"
