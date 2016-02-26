@@ -52,6 +52,8 @@
             android:name=".ProgrammaticallyAddDemoActivity"
             android:label="@string/programmatically_add_demo"/>
 
+        <activity android:name=".RecyclerViewDemoActivity"
+                  android:label="@string/recycler_view_demo"/>
     </application>
 
 </manifest>
