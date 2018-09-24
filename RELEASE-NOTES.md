@@ -1,9 +1,13 @@
+## 1.0.0
+- Migrate to AndroidX
+- Change min API level to v14
+
 ## 0.6.5
-- Shrinked PNG image files
+- Shrunk PNG image files
 - Add tools:shrinkMode="strict" to all drawable resources
 
 ## 0.6.4
-- Added four-paramer constructor to MaterialShadowContainerView
+- Added four-parameter constructor to MaterialShadowContainerView
 - Add a new demo: "Programmatically add demo"
 
 ## 0.6.3

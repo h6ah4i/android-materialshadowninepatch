@@ -19,21 +19,17 @@ package com.h6ah4i.android.example.materialshadowninepatch;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.fragment.app.Fragment;
+import androidx.core.view.ViewCompat;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView;
 
@@ -54,10 +50,10 @@ public class ProgrammaticallyAddDemoFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_programmatically_add_demo, container, false);
 
-        mCheckBoxForceUseCompatMode = (CheckBox) (rootView.findViewById(R.id.checkbox_force_use_compat_mode));
-        mItemsContainer = (LinearLayout) (rootView.findViewById(R.id.items_container));
-        mAddButton = (Button) (rootView.findViewById(R.id.button_add));
-        mClearButton = (Button) (rootView.findViewById(R.id.button_clear));
+        mCheckBoxForceUseCompatMode = rootView.findViewById(R.id.checkbox_force_use_compat_mode);
+        mItemsContainer = rootView.findViewById(R.id.items_container);
+        mAddButton = rootView.findViewById(R.id.button_add);
+        mClearButton = rootView.findViewById(R.id.button_clear);
 
         mCheckBoxForceUseCompatMode.setOnCheckedChangeListener(this);
         mAddButton.setOnClickListener(this);

@@ -30,8 +30,8 @@ android {
     resourcePrefix 'ms9_'
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 23
+        minSdkVersion 14
+        targetSdkVersion 28
 
 
         def dataProps = new Properties()
@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.0.1'
+    implementation 'androidx.core:core:1.0.0'
 }
 
 // NOTE: this line should be place at end of the file

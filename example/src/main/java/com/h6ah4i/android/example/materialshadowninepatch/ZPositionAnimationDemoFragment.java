@@ -20,8 +20,8 @@ import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,9 +55,9 @@ public class ZPositionAnimationDemoFragment
         mCompatShadowItem = rootView.findViewById(R.id.compat_shadow_item);
         mCompatShadowItem.setOnClickListener(this);
 
-        mCompatShadowItemContainer = (MaterialShadowContainerView) (rootView.findViewById(R.id.compat_shadow_item_container));
+        mCompatShadowItemContainer = rootView.findViewById(R.id.compat_shadow_item_container);
 
-        mCheckBoxForceUseCompatMode = (CheckBox) (rootView.findViewById(R.id.checkbox_force_use_compat_mode));
+        mCheckBoxForceUseCompatMode = rootView.findViewById(R.id.checkbox_force_use_compat_mode);
         mCheckBoxForceUseCompatMode.setOnCheckedChangeListener(this);
 
         return rootView;

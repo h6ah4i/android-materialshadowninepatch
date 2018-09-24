@@ -17,7 +17,7 @@
 package com.h6ah4i.android.example.materialshadowninepatch;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ZPositionDemoActivity extends AppCompatActivity {
 

@@ -17,8 +17,8 @@
 package com.h6ah4i.android.example.materialshadowninepatch;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,14 +76,14 @@ public class XYPositionDemoFragment
 
         mDisplayDensity = getResources().getDisplayMetrics().density;
 
-        mSeekBarTranslationZ = (SeekBar) rootView.findViewById(R.id.seekbar_translation_z);
+        mSeekBarTranslationZ = rootView.findViewById(R.id.seekbar_translation_z);
         mSeekBarTranslationZ.setOnSeekBarChangeListener(this);
         mSeekBarTranslationZ.setMax(SEEKBAR_MAX);
 
-        mCheckBoxForceUseCompatMode = (CheckBox) (rootView.findViewById(R.id.checkbox_force_use_compat_mode));
+        mCheckBoxForceUseCompatMode = rootView.findViewById(R.id.checkbox_force_use_compat_mode);
         mCheckBoxForceUseCompatMode.setOnCheckedChangeListener(this);
 
-        mCheckBoxEnableDisplayedPositionAffection = (CheckBox) (rootView.findViewById(R.id.checkbox_displayed_position_affection));
+        mCheckBoxEnableDisplayedPositionAffection = rootView.findViewById(R.id.checkbox_displayed_position_affection);
         mCheckBoxEnableDisplayedPositionAffection.setOnCheckedChangeListener(this);
 
         mCompatShadowItems = new View[mCompatShadowItemIds.length];
@@ -93,7 +93,7 @@ public class XYPositionDemoFragment
 
         mCompatShadowItemContainers = new MaterialShadowContainerView[mCompatShadowItemContainerIds.length];
         for (int i = 0; i < mCompatShadowItemContainerIds.length; i++) {
-            mCompatShadowItemContainers[i] = (MaterialShadowContainerView) rootView.findViewById(mCompatShadowItemContainerIds[i]);
+            mCompatShadowItemContainers[i] = rootView.findViewById(mCompatShadowItemContainerIds[i]);
         }
 
         if (savedInstanceState == null) {
