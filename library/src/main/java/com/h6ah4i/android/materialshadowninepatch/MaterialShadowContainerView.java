@@ -168,7 +168,7 @@ public class MaterialShadowContainerView extends FrameLayout {
             }
 
             if (mUseSpotShadow && (mCurrentSpotShadowDrawable1 != null || mCurrentSpotShadowDrawable2 != null)) {
-                final int savedCount = canvas.save(Canvas.MATRIX_SAVE_FLAG);
+                final int savedCount = canvas.save();
 
                 canvas.translate(mSpotShadowTranslationX, mSpotShadowTranslationY);
 
@@ -488,8 +488,8 @@ public class MaterialShadowContainerView extends FrameLayout {
         childView.getLocationInWindow(mTmpLocations);
 
         final float zPosition = (mShadowTranslationZ + mShadowElevation);
-        final float tx = ViewCompat.getTranslationX(childView);
-        final float ty = ViewCompat.getTranslationY(childView);
+        final float tx = childView.getTranslationX();
+        final float ty = childView.getTranslationY();
 
         final float positionRelatedTranslationX;
         final float positionRelatedTranslationY;
@@ -580,7 +580,7 @@ public class MaterialShadowContainerView extends FrameLayout {
                 maxHeight = Math.max(maxHeight,
                         child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
 
-                childState |= ViewCompat.getMeasuredState(child);
+                childState |= child.getMeasuredState();
 
                 if (measureMatchParentChildren) {
                     if (lp.width == LayoutParams.MATCH_PARENT ||
@@ -607,9 +607,9 @@ public class MaterialShadowContainerView extends FrameLayout {
         }
 
         setMeasuredDimension(
-                ViewCompat.resolveSizeAndState(maxWidth, widthMeasureSpec, childState),
-                ViewCompat.resolveSizeAndState(maxHeight, heightMeasureSpec,
-                        childState << ViewCompat.MEASURED_HEIGHT_STATE_SHIFT));
+                resolveSizeAndState(maxWidth, widthMeasureSpec, childState),
+                resolveSizeAndState(maxHeight, heightMeasureSpec,
+                        childState << MEASURED_HEIGHT_STATE_SHIFT));
 
         if (matchParentChildren != null) {
             final View child = matchParentChildren;
