@@ -1,14 +1,13 @@
 Material Shadow 9-Patch
 ===============
 
-This library provides 9-patch based drop shadow for view elements. Works on API level 9 or later.
+This library provides 9-patch based drop shadow for view elements. Works on API level 14 or later.
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Material%20Shadow%209--Patch-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1562)
 [ ![Download](https://api.bintray.com/packages/h6ah4i/maven/android-materialshadowninepatch/images/download.svg) ](https://bintray.com/h6ah4i/maven/android-materialshadowninepatch/_latestVersion)
 
 ---
 
-<a href="./pic/gb.png?raw=true"><img src="./pic/gb.png?raw=true" alt="Example on Android 2.3" width="200" /></a>
 <a href="./pic/ics.png?raw=true"><img src="./pic/ics.png?raw=true" alt="Example on Android 4.0" width="200" /></a>
 <a href="./pic/lollipop.png?raw=true"><img src="./pic/lollipop.png?raw=true" alt="Example on Android 5.0" width="200" /></a>
 
@@ -17,13 +16,13 @@ This library provides 9-patch based drop shadow for view elements. Works on API 
 Target platforms
 ---
 
-- API level 9 or later
+- API level 14 or later
 
 
 Latest version
 ---
 
-- Version 0.6.5  (Oct. 20, 2015)
+- Version 1.0.0 (September 25, 2018)
 
 Getting started
 ---
@@ -32,7 +31,7 @@ This library is published on jCenter. Just add these lines to `build.gradle`.
 
 ```groovy
 dependencies {
-    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.5'
+    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:1.0.0'
 }
 ```
 
