@@ -54,10 +54,10 @@ public class ProgrammaticallyAddDemoFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_programmatically_add_demo, container, false);
 
-        mCheckBoxForceUseCompatMode = (CheckBox) (rootView.findViewById(R.id.checkbox_force_use_compat_mode));
-        mItemsContainer = (LinearLayout) (rootView.findViewById(R.id.items_container));
-        mAddButton = (Button) (rootView.findViewById(R.id.button_add));
-        mClearButton = (Button) (rootView.findViewById(R.id.button_clear));
+        mCheckBoxForceUseCompatMode = rootView.findViewById(R.id.checkbox_force_use_compat_mode);
+        mItemsContainer = rootView.findViewById(R.id.items_container);
+        mAddButton = rootView.findViewById(R.id.button_add);
+        mClearButton = rootView.findViewById(R.id.button_clear);
 
         mCheckBoxForceUseCompatMode.setOnCheckedChangeListener(this);
         mAddButton.setOnClickListener(this);

@@ -91,11 +91,11 @@ public class ZPositionDemoFragment
 
         mDisplayDensity = getResources().getDisplayMetrics().density;
 
-        mSeekBarElevation = (SeekBar) rootView.findViewById(R.id.seekbar_translation_z);
+        mSeekBarElevation = rootView.findViewById(R.id.seekbar_translation_z);
         mSeekBarElevation.setOnSeekBarChangeListener(this);
         mSeekBarElevation.setMax(SEEKBAR_MAX);
 
-        mCheckBoxForceUseCompatMode = (CheckBox) (rootView.findViewById(R.id.checkbox_force_use_compat_mode));
+        mCheckBoxForceUseCompatMode = rootView.findViewById(R.id.checkbox_force_use_compat_mode);
         mCheckBoxForceUseCompatMode.setOnCheckedChangeListener(this);
 
         mNativeShadowItems = new View[mNativeShadowItemIds.length];
@@ -110,7 +110,7 @@ public class ZPositionDemoFragment
 
         mCompatShadowItemContainers = new MaterialShadowContainerView[mCompatShadowItemContainerIds.length];
         for (int i = 0; i < mCompatShadowItemContainerIds.length; i++) {
-            mCompatShadowItemContainers[i] = (MaterialShadowContainerView) rootView.findViewById(mCompatShadowItemContainerIds[i]);
+            mCompatShadowItemContainers[i] = rootView.findViewById(mCompatShadowItemContainerIds[i]);
         }
 
         return rootView;

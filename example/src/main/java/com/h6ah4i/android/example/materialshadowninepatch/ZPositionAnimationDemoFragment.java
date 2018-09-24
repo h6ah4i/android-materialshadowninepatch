@@ -55,9 +55,9 @@ public class ZPositionAnimationDemoFragment
         mCompatShadowItem = rootView.findViewById(R.id.compat_shadow_item);
         mCompatShadowItem.setOnClickListener(this);
 
-        mCompatShadowItemContainer = (MaterialShadowContainerView) (rootView.findViewById(R.id.compat_shadow_item_container));
+        mCompatShadowItemContainer = rootView.findViewById(R.id.compat_shadow_item_container);
 
-        mCheckBoxForceUseCompatMode = (CheckBox) (rootView.findViewById(R.id.checkbox_force_use_compat_mode));
+        mCheckBoxForceUseCompatMode = rootView.findViewById(R.id.checkbox_force_use_compat_mode);
         mCheckBoxForceUseCompatMode.setOnCheckedChangeListener(this);
 
         return rootView;
