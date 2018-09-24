@@ -27,7 +27,7 @@ import android.graphics.drawable.NinePatchDrawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;

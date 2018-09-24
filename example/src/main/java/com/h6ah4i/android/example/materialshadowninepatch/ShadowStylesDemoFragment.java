@@ -17,16 +17,11 @@
 package com.h6ah4i.android.example.materialshadowninepatch;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.SeekBar;
-
-import com.h6ah4i.android.materialshadowninepatch.MaterialShadowContainerView;
 
 public class ShadowStylesDemoFragment extends Fragment {
 
